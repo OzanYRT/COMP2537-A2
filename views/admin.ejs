@@ -1,0 +1,30 @@
+<%- include("templates/header") %>
+    <h1>Admin Page</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Type</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% users.forEach(user => { %>
+            <tr>
+                <td><%= user.name %></td>
+                <td><%= user.email %></td>
+                <td><%= user.admin ? 'Admin' : 'User' %></td>
+                <td>
+                    <% if (user.admin) { %>
+                        <a href="/demote/<%= user._id %>">Demote to User</a>
+                    <% } else { %>
+                        <a href="/promote/<%= user._id %>">Promote to Admin</a>
+                    <% } %>
+                </td>
+            </tr>
+            <% }) %>
+        </tbody>
+    </table>
+    <a href="/"><button>Back to Home</button></a>
+    <%- include("templates/footer") %>
